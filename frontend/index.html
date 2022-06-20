@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="loadData()">
+    <script>
+        document.onload('loadData')
+
+
+        function loadData(){
+            fetch('https://127.0.0.1:5000/api/flood/latest')
+            .then((res) => res.json())
+            .then((data) =>{
+                let output ='<h2>Has the Splat Flodded</h2>';
+                data.array.forEach(function(flood){
+                    output +=`<h1>${flood.status}</h1>`;
+                 
+                    
+                });
+            document.getElementById('output').innerHTML = output;
+            })
+        }
+    </script>
+</body>
+</html>
