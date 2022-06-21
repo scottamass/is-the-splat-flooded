@@ -8,6 +8,11 @@
 </head>
 <body>
     <div id="output"></div>
+    <div id="button-holder">
+        <button onclick="postFlood()">Log Flood</button>
+        <button onclick="postNotFlood()">All Clear</button>
+    </div>
+    
     <script>
         
 
@@ -16,20 +21,36 @@
         let output ='<h2>Has the Splat Flodded</h2>';
         const response = await fetch('https://5000-scottamass-isthesplatfl-kh2wo0y0j8g.ws-eu47.gitpod.io/api/flood/latest',{mode: 'cors'});
         const data = await response.json();        
-        console.log(data);        
+        var hours = (new Date()).getHours();
+        var minuets = (new Date()).getMinutes();
+        var seconds = (new Date()).getSeconds();       
             output += `
             <h1>${data.Status}</h1>
             <h3>data last updated </br>${data.timestamp}</h3>
+            <p>last app update ${hours}:${minuets}:${seconds}</p>
             `
         
         
         document.getElementById('output').innerHTML= output            
         }
-
-         
+ function postFlood(){
+    console.log('click');
+    let data = '{"Status":"yes"}'
+    console.log(data);
+    fetch('https://5000-scottamass-isthesplatfl-kh2wo0y0j8g.ws-eu47.gitpod.io/api/flood',{method:"POST",headers:{'Content-Type': 'application/json'},body:'{"Status":"yes"}'});
+        
+    }
+    postNotFlood  
+    function postNotFlood(){
+    console.log('click');
+    let data = '{"Status":"yes"}'
+    console.log(data);
+    fetch('https://5000-scottamass-isthesplatfl-kh2wo0y0j8g.ws-eu47.gitpod.io/api/flood',{method:"POST",headers:{'Content-Type': 'application/json'},body:'{"Status":"no"}'});
+        
+    }        
     loadData() 
-    
-    setInterval(loadData,5000)
+     
+    setInterval(loadData,10000)
     </script>
 </body>
 </html>
