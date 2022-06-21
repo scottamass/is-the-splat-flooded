@@ -1,9 +1,12 @@
-
+html{overflow: hidden;}
 
 
 body{
-    background-color: aqua;
+   
     overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 1em;
 }
 
 
@@ -13,11 +16,12 @@ body{
     max-width: 400px;
     text-align: center; 
     z-index: 1000;
+    height: 90vh;
 }
 
 /* waves */
 .ocean {
-    height: 5%;
+    height: 10%;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -31,7 +35,7 @@ body{
     position: absolute;
     bottom: -10px;
     width: 6400px;
-    height: 50px;
+    height: 70px;
     animation: wave 12s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite, swell 8s ease -1.25s infinite;;
     transform: translate3d(0, 0, 0);
     z-index: -1;
@@ -58,4 +62,11 @@ body{
   }
   .endWave{
       display:none;
+  }
+
+  @media only screen and (min-width:600px){
+    .wrapper{
+      height: 100vh;
+    }
+
   }

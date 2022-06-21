@@ -30,7 +30,7 @@ def update_status():
     no ={'Status': 'no'}
     print(data)
     result = data['Status']
-    out={"Status": result,'timestamp':dt.datetime.now()+ dt.timedelta(hours=1)}
+    out={"Status": result,'timestamp':dt.datetime.now()}
     if "yes" or "no" in result:
         status.append(out)
         return out
@@ -45,4 +45,4 @@ def latest():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
