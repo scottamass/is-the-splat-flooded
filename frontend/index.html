@@ -6,24 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body onload="loadData()">
+<body>
+    <div id="output"></div>
     <script>
-        document.onload('loadData')
+        
 
 
-        function loadData(){
-            fetch('https://127.0.0.1:5000/api/flood/latest')
-            .then((res) => res.json())
-            .then((data) =>{
-                let output ='<h2>Has the Splat Flodded</h2>';
-                data.array.forEach(function(flood){
-                    output +=`<h1>${flood.status}</h1>`;
-                 
-                    
-                });
-            document.getElementById('output').innerHTML = output;
-            })
+    async function loadData(){
+        let output ='<h2>Has the Splat Flodded</h2>';
+        const response = await fetch('https://5000-scottamass-isthesplatfl-kh2wo0y0j8g.ws-eu47.gitpod.io/api/flood/latest',{mode: 'cors'});
+        const data = await response.json();        
+        console.log(data);        
+            output += `
+            <h1>${data.Status}</h1>
+            <h3>data last updated </br>${data.timestamp}</h3>
+            `
+        
+        
+        document.getElementById('output').innerHTML= output            
         }
+
+         
+    loadData() 
+    
+    setInterval(loadData,5000)
     </script>
 </body>
 </html>

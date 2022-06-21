@@ -1,12 +1,15 @@
 from flask import Flask
 from flask import request, jsonify
 import datetime as dt
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+
 
 status = [{'Status':'no',"timestamp":"2015-10-21T09:47:50-04:00"}]
 
@@ -34,7 +37,9 @@ def update_status():
     else: return "error"
 
 @app.route('/api/flood/latest', methods=['GET'])
+@cross_origin()
 def latest():
+    
     return jsonify(status[-1])    
   
 
