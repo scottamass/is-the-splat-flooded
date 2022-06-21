@@ -8,12 +8,17 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="output"></div>
-    <div id="button-holder">
-        <button onclick="postFlood()">Log Flood</button>
-        <button onclick="postNotFlood()">All Clear</button>
+    <div class="wrapper">
+
+        <div id="output"></div>
+        <div id="button-holder">
+            <button onclick="postFlood()">Log Flood</button>
+            <button onclick="postNotFlood()">All Clear</button>
+        </div>
+        <div class="ocean">
+            <div id="wave" class="wave"></div>
+          </div>
     </div>
-    
     <script>
     var result    
     function colorCheck(){
@@ -24,10 +29,19 @@
         if (result == no)
         document.body.style.backgroundColor = "green";
     }
+    function changeHeight(){
+        const yes = "yes"
+        const no = "no"
+        if (result == yes)
+        document.getElementById("wave").style.height = "400px";
+        if (result == no )
+        document.getElementById("wave").setAttribute('style', '')
+        
+    }
 
     async function loadData(){
         let output ='<h2>Has the Splat Flooded</h2>';
-        const response = await fetch('https://5000-scottamass-isthesplatfl-kh2wo0y0j8g.ws-eu47.gitpod.io/api/flood/latest',{mode: 'cors'});
+        const response = await fetch('http://127.0.0.1:5000/api/flood/latest',{mode: 'cors'});
         const data = await response.json();        
         var hours = (new Date()).getHours();
         var minuets = (new Date()).getMinutes();
@@ -41,20 +55,19 @@
         console.log(result)
         
         document.getElementById('output').innerHTML= output    
-        colorCheck()       
+        colorCheck()
+               
         }
  function postFlood(){
     console.log('click');
-    let data = '{"Status":"yes"}'
-    console.log(data);
+ 
     fetch('https://5000-scottamass-isthesplatfl-kh2wo0y0j8g.ws-eu47.gitpod.io/api/flood',{method:"POST",headers:{'Content-Type': 'application/json'},body:'{"Status":"yes"}'});
         
     }
-    postNotFlood  
-    function postNotFlood(){
+     
+function postNotFlood(){
     console.log('click');
-    let data = '{"Status":"yes"}'
-    console.log(data);
+
     fetch('https://5000-scottamass-isthesplatfl-kh2wo0y0j8g.ws-eu47.gitpod.io/api/flood',{method:"POST",headers:{'Content-Type': 'application/json'},body:'{"Status":"no"}'});
         
     }        
@@ -63,7 +76,9 @@
     
     
     console.log(result)
+    setInterval(changeHeight,1000)
     setInterval(loadData,10000)
     </script>
+    
 </body>
 </html>

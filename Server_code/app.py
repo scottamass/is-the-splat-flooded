@@ -30,7 +30,7 @@ def update_status():
     no ={'Status': 'no'}
     print(data)
     result = data['Status']
-    out={"Status": result,'timestamp':dt.datetime.now()}
+    out={"Status": result,'timestamp':dt.datetime.now()+ dt.timedelta(hours=1)}
     if "yes" or "no" in result:
         status.append(out)
         return out
